@@ -1,0 +1,20 @@
+{
+  "name": "nxtshare",
+  "description": "Source code of nxtshare.com",
+  "main": "bin/dev",
+  "authors": [
+    "NxtShare Inc"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}
