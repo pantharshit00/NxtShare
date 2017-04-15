@@ -10,19 +10,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = require('react-router-dom');
-
-var _home = require('../home/home');
-
-var _home2 = _interopRequireDefault(_home);
-
-var _login = require('../login/login');
-
-var _login2 = _interopRequireDefault(_login);
-
-var _navbar = require('../navbar/navbar');
-
-var _navbar2 = _interopRequireDefault(_navbar);
+var _reactHelmet = require('react-helmet');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32,29 +20,56 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Routes = function (_Component) {
-    _inherits(Routes, _Component);
+var Home = function (_Component) {
+    _inherits(Home, _Component);
 
-    function Routes() {
-        _classCallCheck(this, Routes);
+    function Home() {
+        _classCallCheck(this, Home);
 
-        return _possibleConstructorReturn(this, (Routes.__proto__ || Object.getPrototypeOf(Routes)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
     }
 
-    _createClass(Routes, [{
+    _createClass(Home, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (typeof window !== "undefined") {
+                window.sr.reveal("#animate-container", { origin: 'left', duration: 1200, distance: '1000px' });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_navbar2.default, null),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _login2.default })
+                _react2.default.createElement(
+                    _reactHelmet.Helmet,
+                    null,
+                    _react2.default.createElement(
+                        'script',
+                        null,
+                        '$(function(){ $("#text-typed").typed({strings:[\'Level\',\'Thoughts\',\'Mind\',\'Write\',\'Wit\',\'You\',\'Share\'],typeSpeed: 5,backDelay: 1200 })});'
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'card' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container', id: 'animate-container' },
+                        _react2.default.createElement(
+                            'h1',
+                            { className: 'text-center' },
+                            'Nxt',
+                            _react2.default.createElement('span', { id: 'text-typed', className: 'brand-color' })
+                        )
+                    )
+                )
             );
         }
     }]);
 
-    return Routes;
+    return Home;
 }(_react.Component);
 
-exports.default = Routes;
+exports.default = Home;

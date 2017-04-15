@@ -34,8 +34,7 @@ router.get('/*', function (req, res) {
         _react2.default.createElement(_routes2.default, null)
     ));
     var helmet = _reactHelmet.Helmet.renderStatic();
-    var headData = helmet.title.toString() + ' ' + helmet.meta.toString() + helmet.link.toString();
-    console.log(headData);
+    var headData = helmet.title.toString() + ' ' + helmet.meta.toString() + helmet.script.toString() + helmet.link.toString();
     if (context.url) {
         res.redirect(context.url);
     } else {

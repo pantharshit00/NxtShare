@@ -14,7 +14,7 @@ router.get('/*', (req, res) => {
     </StaticRouter>
     );
     const helmet = Helmet.renderStatic();
-    const headData = `${helmet.title.toString()} ${helmet.meta.toString()}${helmet.link.toString()}`;
+    const headData = `${helmet.title.toString()} ${helmet.meta.toString()}${helmet.script.toString()}${helmet.link.toString()}`;
     if (context.url) {
         res.redirect(context.url);
     }

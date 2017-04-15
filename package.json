@@ -6,22 +6,35 @@
   "author": "NxtShare Inc",
   "license": "ISC",
   "scripts": {
+    "start": "npm run production",
+    "production": "node bin/www",
     "build": "webpack -p && npm run clean && cp -r src/* dist/ && babel src/ -d dist/",
     "clean": "rm -rf dist/ && mkdir dist",
     "bundle": "webpack",
-    "dev": "concurrently \"nodemon\" \"webpack -w\" "
+    "dev": "concurrently \"nodemon --ignore *.bundle.js\" \"webpack -w\" "
   },
   "dependencies": {
+    "axios": "^0.13.1",
     "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
     "concurrently": "^3.4.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-helmet": "^5.0.2",
-    "react-router-dom": "^4.0.0"
+    "react-redux": "^5.0.4",
+    "react-router-dom": "^4.0.0",
+    "redux": "^3.6.0",
+    "scrollreveal": "^3.3.5",
+    "sequelize": "^3.30.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -30,10 +43,12 @@
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
+    "dotenv": "^4.0.0",
     "webpack": "^2.3.3"
   }
 }
