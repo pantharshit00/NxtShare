@@ -96,6 +96,10 @@ a.active {
     margin-top: 42px;
 }
 
+.text-danger{
+    color:#d91e18 !important;
+}
+
 @keyframes bg_animate{
     0%{background-color: $primary}
     15%{background-color: darken($primary,4%)}

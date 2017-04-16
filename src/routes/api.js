@@ -3,7 +3,7 @@ import User from '../models/user';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
-import {jwtStrategy} from '../config/passport';
+import { jwtStrategy } from '../config/passport';
 
 const router = express.Router();
 
@@ -26,9 +26,14 @@ function compareHash(string, original) {
         return false;
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 router.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
         res.json({
             "status": "ok",
             "isAuthenticated": false,
@@ -38,7 +43,7 @@ router.post('/login', (req, res) => {
     else {
         User.findOne({
             where: {
-                username
+                email
             }
         }).then((user) => {
             if (user == null) {
@@ -57,7 +62,7 @@ router.post('/login', (req, res) => {
                     })
                 }
                 else {
-                    const token = jwt.sign({id:user.id},process.env.secret,{ expiresIn: 2592000 })
+                    const token = jwt.sign({ id: user.id }, process.env.secret, { expiresIn: 2592000 })
                     res.json({
                         "status": "ok",
                         "isAuthenticated": true,
@@ -66,13 +71,57 @@ router.post('/login', (req, res) => {
                 }
             }
         })
-        .catch(err => res.json({"status":"no"}))
+            .catch(err => res.json({ "status": "no" }))
     }
 })
 
-router.get('/protected',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    res.send("HELLO PROTECTED");
+router.post('/register', (req, res) => {
+    console.log(req.body)
+    const { name, email, password, password2 } = req.body;
+    if ((!name || !email || !password || !password2) || (password !== password2) || !validateEmail(email)) {
+        res.status(403).json({
+            registered: false,
+            err: "Bad Data",
+            errField: "all"
+        })
+    }
+    else {
+        User.findOne({
+            where: {
+                email
+            }
+        }).then((user) => {
+            if (user !== null) {
+                res.json({
+                    registered: false,
+                    err: "Email already in user",
+                    errField: "email"
+                })
+            }
+            else {
+                let newUser = {
+                    name,
+                    email,
+                    password: hashPassword(password)
+                }
+                User.create(newUser).then(() => {
+                    res.json({
+                        registered: true,
+                        err: null,
+                        errField: null
+                    })
+                })
+                .catch((err)=> res.json({
+                    registered: false,
+                    err,
+                    errField: "unknown"
+                }))
+            }
+        })
+    }
 })
+
+
 
 
 export default router;

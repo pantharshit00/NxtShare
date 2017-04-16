@@ -5305,15 +5305,15 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #333;
+  border-color: #000;
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-  background-color: #333;
+  background-color: #f1f1f1;
 }
 
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #fff;
+  background-color: #000;
 }
 
 .navbar-inverse .navbar-collapse,
@@ -7848,6 +7848,10 @@ a.active {
   padding: 20px;
   border-radius: 4px;
   margin-top: 42px;
+}
+
+.text-danger {
+  color: #d91e18 !important;
 }
 
 @keyframes bg_animate {

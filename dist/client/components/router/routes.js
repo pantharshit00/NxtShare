@@ -24,6 +24,10 @@ var _navbar = require('../navbar/navbar');
 
 var _navbar2 = _interopRequireDefault(_navbar);
 
+var _register = require('../register/register');
+
+var _register2 = _interopRequireDefault(_register);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49,7 +53,8 @@ var Routes = function (_Component) {
                 null,
                 _react2.default.createElement(_navbar2.default, null),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _login2.default })
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _login2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/register', component: _register2.default })
             );
         }
     }]);

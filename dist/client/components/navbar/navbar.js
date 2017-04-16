@@ -113,9 +113,9 @@ var Navbar = function (_Component) {
                                 'li',
                                 null,
                                 _react2.default.createElement(
-                                    'a',
-                                    { href: '#contact' },
-                                    'Contact'
+                                    _reactRouterDom.NavLink,
+                                    { to: '/register' },
+                                    'Register'
                                 )
                             )
                         )

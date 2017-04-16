@@ -20,7 +20,11 @@ var User = _database2.default.define('users', {
         primaryKey: true,
         autoIncrement: true
     },
-    username: {
+    name: {
+        type: _sequelize2.default.STRING,
+        allowNull: false
+    },
+    email: {
         type: _sequelize2.default.STRING,
         unique: true,
         allowNull: false

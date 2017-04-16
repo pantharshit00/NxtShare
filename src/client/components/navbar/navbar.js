@@ -35,7 +35,7 @@ class Navbar extends Component {
                         <ul class="nav navbar-nav navbar-right">
                             <li><NavLink to={'/'} exact>Home</NavLink></li>
                             <li><NavLink to={'/login'}>Login</NavLink></li>
-                            <li><a href="#contact">Contact</a></li>
+                            <li><NavLink to={'/register'}>Register</NavLink></li>
                         </ul>
                     </div>
                 </div>

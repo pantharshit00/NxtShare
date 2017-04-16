@@ -20,9 +20,19 @@ var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+var _passport3 = require('../config/passport');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
+
+router.use(_passport2.default.initialize());
+router.use(_passport2.default.session());
+(0, _passport3.jwtStrategy)(_passport2.default);
 
 function hashPassword(password) {
     var salt = _crypto2.default.randomBytes(16).toString('hex');
@@ -36,12 +46,17 @@ function compareHash(string, original) {
     if (originalHash[1] == hash) return true;else return false;
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 router.post('/login', function (req, res) {
     var _req$body = req.body,
-        username = _req$body.username,
+        email = _req$body.email,
         password = _req$body.password;
 
-    if (!username || !password) {
+    if (!email || !password) {
         res.json({
             "status": "ok",
             "isAuthenticated": false,
@@ -50,7 +65,7 @@ router.post('/login', function (req, res) {
     } else {
         _user2.default.findOne({
             where: {
-                username: username
+                email: email
             }
         }).then(function (user) {
             if (user == null) {
@@ -77,6 +92,56 @@ router.post('/login', function (req, res) {
             }
         }).catch(function (err) {
             return res.json({ "status": "no" });
+        });
+    }
+});
+
+router.post('/register', function (req, res) {
+    console.log(req.body);
+    var _req$body2 = req.body,
+        name = _req$body2.name,
+        email = _req$body2.email,
+        password = _req$body2.password,
+        password2 = _req$body2.password2;
+
+    if (!name || !email || !password || !password2 || password !== password2 || !validateEmail(email)) {
+        res.status(403).json({
+            registered: false,
+            err: "Bad Data",
+            errField: "all"
+        });
+    } else {
+        _user2.default.findOne({
+            where: {
+                email: email
+            }
+        }).then(function (user) {
+            if (user !== null) {
+                res.json({
+                    registered: false,
+                    err: "Email already in user",
+                    errField: "email"
+                });
+            } else {
+                var newUser = {
+                    name: name,
+                    email: email,
+                    password: hashPassword(password)
+                };
+                _user2.default.create(newUser).then(function () {
+                    res.json({
+                        registered: true,
+                        err: null,
+                        errField: null
+                    });
+                }).catch(function (err) {
+                    return res.json({
+                        registered: false,
+                        err: err,
+                        errField: "unknown"
+                    });
+                });
+            }
         });
     }
 });

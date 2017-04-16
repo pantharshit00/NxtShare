@@ -14,6 +14,8 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71,10 +73,10 @@ var Login_form = function (_Component) {
                             _react2.default.createElement(
                                 'h4',
                                 null,
-                                'Username'
+                                'Email'
                             )
                         ),
-                        _react2.default.createElement('input', { ref: 'username', type: 'text', placeholder: 'Username goes here...', className: 'form-control' })
+                        _react2.default.createElement('input', { autoFocus: true, ref: 'username', type: 'email', placeholder: 'Email goes here...', className: 'form-control' })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -120,7 +122,7 @@ var Login_form = function (_Component) {
                 });
             } else {
                 _axios2.default.post('/api/login', {
-                    username: username,
+                    email: username,
                     password: password
                 }).then(function (res) {
                     _this3.refs.submit.value = "Submit";
@@ -136,6 +138,8 @@ var Login_form = function (_Component) {
                         });
                     } else {
                         if (!data.isAuthenticated) {
+                            _this3.refs.username.value = '';
+                            _this3.refs.password.value = '';
                             _this3.setState({
                                 mainError: _react2.default.createElement(
                                     'div',
@@ -145,8 +149,19 @@ var Login_form = function (_Component) {
                             });
                         } else {
                             window.localStorage.setItem("jwt_token", data.token);
+                            _this3.props.history.push('/');
                         }
                     }
+                }).catch(function (err) {
+                    _this3.refs.submit.value = "Submit";
+                    _this3.refs.submit.className = "form-control submit-btn";
+                    _this3.setState({
+                        mainError: _react2.default.createElement(
+                            'div',
+                            { className: 'alert alert-danger' },
+                            'Something went wrong in the server. Sorry'
+                        )
+                    });
                 });
             }
         }
@@ -155,4 +170,7 @@ var Login_form = function (_Component) {
     return Login_form;
 }(_react.Component);
 
-exports.default = Login_form;
+Login_form.propTypes = {
+    history: _react2.default.PropTypes.object.isRequired
+};
+exports.default = (0, _reactRouter.withRouter)(Login_form);
