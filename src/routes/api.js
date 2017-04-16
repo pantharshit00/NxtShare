@@ -2,8 +2,14 @@ import express from 'express';
 import User from '../models/user';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import passport from 'passport';
+import {jwtStrategy} from '../config/passport';
 
 const router = express.Router();
+
+router.use(passport.initialize());
+router.use(passport.session());
+jwtStrategy(passport);
 
 function hashPassword(password) {
     let salt = crypto.randomBytes(16).toString('hex');
@@ -63,5 +69,10 @@ router.post('/login', (req, res) => {
         .catch(err => res.json({"status":"no"}))
     }
 })
+
+router.get('/protected',passport.authenticate('jwt',{session:false}),(req,res)=>{
+    res.send("HELLO PROTECTED");
+})
+
 
 export default router;
