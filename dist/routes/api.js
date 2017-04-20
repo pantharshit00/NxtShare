@@ -82,7 +82,7 @@ router.post('/login', function (req, res) {
                         "error": "Username/Password is incorrect"
                     });
                 } else {
-                    var token = _jsonwebtoken2.default.sign({ id: user.id }, process.env.secret, { expiresIn: 2592000 });
+                    var token = _jsonwebtoken2.default.sign({ id: user.id }, process.env.SECRET, { expiresIn: 2592000 });
                     res.json({
                         "status": "ok",
                         "isAuthenticated": true,
