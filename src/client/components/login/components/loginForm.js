@@ -57,7 +57,7 @@ class Login_form extends Component {
             this.refs.submit.value = "Submit"
             this.refs.submit.className = "form-control submit-btn"
             this.setState({
-                mainError: <div className="alert alert-danger">Please Fill in all the Fields</div>
+                mainError: <div className="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;Please Fill in all the Fields</div>
             })
         }
         else {
@@ -70,7 +70,7 @@ class Login_form extends Component {
                 let data = res.data;
                 if (data.status !== "ok") {
                     this.setState({
-                        mainError: <div className="alert alert-danger">Something went wrong in the server. Sorry</div>
+                        mainError: <div className="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;Something went wrong in the server. Sorry</div>
                     })
                 }
                 else {
@@ -78,7 +78,7 @@ class Login_form extends Component {
                         this.refs.username.value = '';
                         this.refs.password.value = '';
                         this.setState({
-                            mainError: <div className="alert alert-danger">{data.error}</div>
+                            mainError: <div className="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;{data.error}</div>
                         })
                     }
                     else {
@@ -90,7 +90,7 @@ class Login_form extends Component {
                 this.refs.submit.value = "Submit"
                 this.refs.submit.className = "form-control submit-btn"
                 this.setState({
-                    mainError: <div className="alert alert-danger">Something went wrong in the server. Sorry</div>
+                    mainError: <div className="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;Something went wrong in the server. Sorry</div>
                 })
             })
         }

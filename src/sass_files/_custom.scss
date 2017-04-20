@@ -6,6 +6,7 @@ h1,h2,h3,h4,h5,h6{
 body{
     font-family: 'Open Sans', sans-serif;
     background-color: #f4f4f4;
+    margin-top: 70px;
 }
 
 .navbar-brand{
@@ -98,6 +99,10 @@ a.active {
 
 .text-danger{
     color:#d91e18 !important;
+}
+
+.write-area{
+    border: 1px solid #f3f3f3;
 }
 
 @keyframes bg_animate{

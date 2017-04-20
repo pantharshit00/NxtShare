@@ -15,7 +15,7 @@ class Navbar extends Component {
     }
     render() {
         return (
-            <nav class="navbar navbar-inverse">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
                 <Helmet>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.7/typed.min.js"/>

@@ -48,7 +48,7 @@ var Navbar = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'nav',
-                { className: 'navbar navbar-inverse' },
+                { className: 'navbar navbar-inverse navbar-fixed-top' },
                 _react2.default.createElement(
                     _reactHelmet.Helmet,
                     null,

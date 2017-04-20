@@ -12,6 +12,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactHelmet = require('react-helmet');
 
+var _register_form = require('../register/components/register_form');
+
+var _register_form2 = _interopRequireDefault(_register_form);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,6 +38,7 @@ var Home = function (_Component) {
         value: function componentDidMount() {
             if (typeof window !== "undefined") {
                 window.sr.reveal("#animate-container", { origin: 'left', duration: 1200, distance: '1000px' });
+                window.sr.reveal("#animate-left", { origin: "right", distance: "500px", delay: 500, duration: 1200 });
             }
         }
     }, {
@@ -49,6 +54,11 @@ var Home = function (_Component) {
                         'script',
                         null,
                         '$(function(){ $("#text-typed").typed({strings:[\'Level\',\'Thoughts\',\'Mind\',\'Write\',\'Wit\',\'You\',\'Share\'],typeSpeed: 5,backDelay: 1200 })});'
+                    ),
+                    _react2.default.createElement(
+                        'script',
+                        null,
+                        '$(function(){ $("#para").typed({strings:[\'Have a great idea.\'],typeSpeed: 50,backDelay: 1200 })});'
                     )
                 ),
                 _react2.default.createElement(
@@ -56,12 +66,36 @@ var Home = function (_Component) {
                     { className: 'card' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'container', id: 'animate-container' },
+                        { className: 'container' },
                         _react2.default.createElement(
-                            'h1',
-                            { className: 'text-center' },
-                            'Nxt',
-                            _react2.default.createElement('span', { id: 'text-typed', className: 'brand-color' })
+                            'div',
+                            { id: 'animate-container', className: 'row' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'col-md-8' },
+                                _react2.default.createElement(
+                                    'h1',
+                                    { style: { fontSize: 56 + 'px' }, className: 'text-center' },
+                                    'Nxt',
+                                    _react2.default.createElement('span', { id: 'text-typed', className: 'brand-color' })
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'write-area' },
+                                    '//test'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'col-md-4', id: 'animate-left' },
+                                _react2.default.createElement(
+                                    'h1',
+                                    null,
+                                    'Join the fame now'
+                                ),
+                                _react2.default.createElement('hr', null),
+                                _react2.default.createElement(_register_form2.default, null)
+                            )
                         )
                     )
                 )

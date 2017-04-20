@@ -117,7 +117,8 @@ var Login_form = function (_Component) {
                     mainError: _react2.default.createElement(
                         'div',
                         { className: 'alert alert-danger' },
-                        'Please Fill in all the Fields'
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                        ' \xA0Please Fill in all the Fields'
                     )
                 });
             } else {
@@ -133,7 +134,8 @@ var Login_form = function (_Component) {
                             mainError: _react2.default.createElement(
                                 'div',
                                 { className: 'alert alert-danger' },
-                                'Something went wrong in the server. Sorry'
+                                _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                                ' \xA0Something went wrong in the server. Sorry'
                             )
                         });
                     } else {
@@ -144,6 +146,8 @@ var Login_form = function (_Component) {
                                 mainError: _react2.default.createElement(
                                     'div',
                                     { className: 'alert alert-danger' },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                                    ' \xA0',
                                     data.error
                                 )
                             });
@@ -159,7 +163,8 @@ var Login_form = function (_Component) {
                         mainError: _react2.default.createElement(
                             'div',
                             { className: 'alert alert-danger' },
-                            'Something went wrong in the server. Sorry'
+                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                            ' \xA0Something went wrong in the server. Sorry'
                         )
                     });
                 });

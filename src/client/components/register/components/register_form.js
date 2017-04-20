@@ -67,7 +67,7 @@ class Register_form extends Component {
 
         if (!email || !name || !password || !password2) {
             this.setState({
-                error: <div className="alert alert-danger">Please Fill in all the Fields</div>
+                error: <div className="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;Please Fill in all the Fields</div>
             })
             this.refs.submit.value = "Submit"
             this.refs.submit.className = "form-control submit-btn"

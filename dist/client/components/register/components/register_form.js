@@ -141,7 +141,8 @@ var Register_form = function (_Component) {
                     error: _react2.default.createElement(
                         'div',
                         { className: 'alert alert-danger' },
-                        'Please Fill in all the Fields'
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                        ' \xA0Please Fill in all the Fields'
                     )
                 });
                 this.refs.submit.value = "Submit";
