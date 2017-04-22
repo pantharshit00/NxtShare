@@ -97,7 +97,6 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-    console.log(req.body);
     var _req$body2 = req.body,
         name = _req$body2.name,
         email = _req$body2.email,

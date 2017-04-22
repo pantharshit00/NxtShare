@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 
 router.get('/*', function (req, res) {
     var context = {};
-    var html = (0, _server.renderToString)(_react2.default.createElement(
+    var html = (0, _server.renderToStaticMarkup)(_react2.default.createElement(
         _reactRedux.Provider,
         { store: _store2.default },
         _react2.default.createElement(
@@ -45,11 +45,8 @@ router.get('/*', function (req, res) {
     ));
     var helmet = _reactHelmet.Helmet.renderStatic();
     var headData = helmet.title.toString() + ' ' + helmet.meta.toString() + helmet.script.toString() + helmet.link.toString();
-    if (context.url) {
-        res.redirect(context.url);
-    } else {
-        res.render('index', { html: html, headData: headData });
-    }
+
+    res.render('index', { html: html, headData: headData });
 });
 
 exports.default = router;

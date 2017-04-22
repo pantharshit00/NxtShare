@@ -18,6 +18,16 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
+var _setAuthorizationHeader = require('./setAuthorizationHeader');
+
+var _setAuthorizationHeader2 = _interopRequireDefault(_setAuthorizationHeader);
+
+var _user = require('../redux/actions/user');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -35,25 +45,42 @@ var PrivateRoute = (_dec = (0, _reactRedux.connect)(function (state) {
 }), _dec(_class = function (_React$Component) {
     _inherits(PrivateRoute, _React$Component);
 
-    function PrivateRoute() {
+    function PrivateRoute(props) {
         _classCallCheck(this, PrivateRoute);
 
-        return _possibleConstructorReturn(this, (PrivateRoute.__proto__ || Object.getPrototypeOf(PrivateRoute)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (PrivateRoute.__proto__ || Object.getPrototypeOf(PrivateRoute)).call(this, props));
+
+        _this.state = {
+            auth: _this.props.user.isAuthenticated
+        };
+        return _this;
     }
 
     _createClass(PrivateRoute, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            if (typeof window !== "undefined") {
+                if (typeof window.localStorage.jwt_token !== "undefined") this.setState({
+                    auth: true
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
                 Component = _props.component,
-                user = _props.user,
-                rest = _objectWithoutProperties(_props, ['component', 'user']);
+                rest = _objectWithoutProperties(_props, ['component']);
 
-            return _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: function render(props) {
-                    return user.isAuthenticated ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: {
-                            pathname: '/login?redirect=' + props.location.pathname
-                        } });
-                } }));
+            var route = _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { component: Component }));
+            var path = '/login?redirect=' + this.props.path;
+            var red = _react2.default.createElement(_reactRouterDom.Redirect, { to: path });
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.state.auth && route,
+                !this.state.auth && red
+            );
         }
     }]);
 

@@ -67,7 +67,7 @@ var Login_form = (_dec = (0, _reactRedux.connect)(function (state) {
                 });
             };
             this.setState({
-                from: this.props.location.search ? decodeURIComponent(this.props.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent("redirect").replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) : "/",
+                from: this.props.location.search ? decodeURIComponent(this.props.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent("redirect").replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) : "/home",
                 mainError: this.props.location.search ? _react2.default.createElement(
                     'div',
                     { className: 'alert alert-danger' },

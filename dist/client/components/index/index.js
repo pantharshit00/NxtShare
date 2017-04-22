@@ -16,7 +16,7 @@ var _register_form = require('../register/components/register_form');
 
 var _register_form2 = _interopRequireDefault(_register_form);
 
-var _setAuthorizationHeader = require('../../../utils/setAuthorizationHeader');
+var _setAuthorizationHeader = require('../../utils/setAuthorizationHeader');
 
 var _setAuthorizationHeader2 = _interopRequireDefault(_setAuthorizationHeader);
 
