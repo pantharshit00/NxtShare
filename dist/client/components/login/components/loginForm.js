@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _dec, _class;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -16,6 +18,14 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRouter = require('react-router');
 
+var _reactRedux = require('react-redux');
+
+var _user = require('../../../redux/actions/user');
+
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24,7 +34,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Login_form = function (_Component) {
+var Login_form = (_dec = (0, _reactRedux.connect)(function (state) {
+    return { user: state.user };
+}), _dec(_class = function (_Component) {
     _inherits(Login_form, _Component);
 
     function Login_form(props) {
@@ -33,7 +45,8 @@ var Login_form = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Login_form.__proto__ || Object.getPrototypeOf(Login_form)).call(this, props));
 
         _this.state = {
-            mainError: ''
+            mainError: '',
+            from: '/'
         };
         return _this;
     }
@@ -53,6 +66,15 @@ var Login_form = function (_Component) {
                     mainError: ''
                 });
             };
+            this.setState({
+                from: this.props.location.search ? decodeURIComponent(this.props.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent("redirect").replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) : "/",
+                mainError: this.props.location.search ? _react2.default.createElement(
+                    'div',
+                    { className: 'alert alert-danger' },
+                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+                    ' \xA0Login in order to continue '
+                ) : ''
+            });
         }
     }, {
         key: 'render',
@@ -76,7 +98,7 @@ var Login_form = function (_Component) {
                                 'Email'
                             )
                         ),
-                        _react2.default.createElement('input', { autoFocus: true, ref: 'username', type: 'email', placeholder: 'Email goes here...', className: 'form-control' })
+                        _react2.default.createElement('input', { ref: 'username', type: 'email', placeholder: 'Email goes here...', className: 'form-control' })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -152,8 +174,9 @@ var Login_form = function (_Component) {
                                 )
                             });
                         } else {
+                            _this3.props.dispatch((0, _user.login_user)(_jsonwebtoken2.default.decode(data.token)));
                             window.localStorage.setItem("jwt_token", data.token);
-                            _this3.props.history.push('/');
+                            _this3.props.history.push(_this3.state.from);
                         }
                     }
                 }).catch(function (err) {
@@ -164,7 +187,7 @@ var Login_form = function (_Component) {
                             'div',
                             { className: 'alert alert-danger' },
                             _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
-                            ' \xA0Something went wrong in the server. Sorry'
+                            ' \xA0Something went wrong. Try again '
                         )
                     });
                 });
@@ -173,8 +196,7 @@ var Login_form = function (_Component) {
     }]);
 
     return Login_form;
-}(_react.Component);
-
+}(_react.Component)) || _class);
 Login_form.propTypes = {
     history: _react2.default.PropTypes.object.isRequired
 };

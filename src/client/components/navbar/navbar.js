@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 if (typeof window !== "undefined") {
     var ScrollReveal = require("scrollreveal");

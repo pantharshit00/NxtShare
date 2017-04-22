@@ -33,7 +33,7 @@ class Register_form extends Component {
                     {this.state.error}
                     <div className="form-group">
                         <label>Name</label>
-                        <input type="text" autoFocus placeholder="Name goes here..." className="form-control" ref="name" />
+                        <input type="text" placeholder="Name goes here..." className="form-control" ref="name" />
                     </div>
                     <div className="form-group">
                         <label>Email</label>

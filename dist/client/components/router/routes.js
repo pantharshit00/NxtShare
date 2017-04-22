@@ -12,9 +12,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = require('react-router-dom');
 
-var _home = require('../home/home');
+var _authReq = require('../../utils/authReq');
 
-var _home2 = _interopRequireDefault(_home);
+var _authReq2 = _interopRequireDefault(_authReq);
+
+var _index = require('../index/index');
+
+var _index2 = _interopRequireDefault(_index);
 
 var _login = require('../login/login');
 
@@ -27,6 +31,10 @@ var _navbar2 = _interopRequireDefault(_navbar);
 var _register = require('../register/register');
 
 var _register2 = _interopRequireDefault(_register);
+
+var _home = require('../home/home');
+
+var _home2 = _interopRequireDefault(_home);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,9 +60,14 @@ var Routes = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_navbar2.default, null),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _login2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/register', component: _register2.default })
+                _react2.default.createElement(
+                    _reactRouterDom.Switch,
+                    null,
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _index2.default }),
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _login2.default }),
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/register', component: _register2.default }),
+                    _react2.default.createElement(_authReq2.default, { exact: true, path: '/home', component: _home2.default })
+                )
             );
         }
     }]);

@@ -73,7 +73,7 @@ var Register_form = function (_Component) {
                             null,
                             'Name'
                         ),
-                        _react2.default.createElement('input', { type: 'text', autoFocus: true, placeholder: 'Name goes here...', className: 'form-control', ref: 'name' })
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'Name goes here...', className: 'form-control', ref: 'name' })
                     ),
                     _react2.default.createElement(
                         'div',

@@ -146,4 +146,8 @@ router.post('/register', function (req, res) {
     }
 });
 
+router.get('/test_auth', _passport2.default.authenticate('jwt', { session: false }), function (req, res) {
+    res.json({ success: true });
+});
+
 exports.default = router;

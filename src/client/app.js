@@ -1,15 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import store from './redux/store';
 
 import Routes from './components/router/routes';
 
 const target = document.getElementById("root");
 
 render(
-    <BrowserRouter>
-        <Routes />
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <Routes />
+        </BrowserRouter>
+    </Provider>,
     target
 );
 

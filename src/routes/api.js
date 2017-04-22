@@ -76,7 +76,6 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    console.log(req.body)
     const { name, email, password, password2 } = req.body;
     if ((!name || !email || !password || !password2) || (password !== password2) || !validateEmail(email)) {
         res.status(403).json({
@@ -121,7 +120,9 @@ router.post('/register', (req, res) => {
     }
 })
 
-
+router.get('/test_auth',passport.authenticate('jwt',{session:false}),(req,res)=>{
+    res.json({success:true})
+})
 
 
 export default router;
