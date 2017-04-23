@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { login_user } from '../../../redux/actions/user';
+import jwt_decode from 'jwt-decode';
 
 @connect((state) => (
     { user: state.user }
@@ -92,12 +93,13 @@ class Login_form extends Component {
                         })
                     }
                     else {
-                        this.props.dispatch(login_user(jwt.decode(data.token)))
+                        this.props.dispatch(login_user(jwt_decode(data.token)))
                         window.localStorage.setItem("jwt_token", data.token)
                         this.props.history.push(this.state.from);
                     }
                 }
             }).catch(err => {
+                console.log(err)
                 this.refs.submit.value = "Submit"
                 this.refs.submit.className = "form-control submit-btn"
                 this.setState({
