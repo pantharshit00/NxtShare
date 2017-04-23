@@ -10,6 +10,8 @@ var _reactRouterDom = require('react-router-dom');
 
 var _reactRedux = require('react-redux');
 
+require('../sass_files/style.scss');
+
 var _store = require('./redux/store');
 
 var _store2 = _interopRequireDefault(_store);
