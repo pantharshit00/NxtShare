@@ -18,10 +18,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _jsonwebtoken = require('jsonwebtoken');
-
-var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
-
 var _setAuthorizationHeader = require('./setAuthorizationHeader');
 
 var _setAuthorizationHeader2 = _interopRequireDefault(_setAuthorizationHeader);

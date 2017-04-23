@@ -3,7 +3,6 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { login_user } from '../../../redux/actions/user';
-import jwt from 'jsonwebtoken';
 
 @connect((state) => (
     { user: state.user }

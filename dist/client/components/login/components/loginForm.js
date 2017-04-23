@@ -22,10 +22,6 @@ var _reactRedux = require('react-redux');
 
 var _user = require('../../../redux/actions/user');
 
-var _jsonwebtoken = require('jsonwebtoken');
-
-var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -127,6 +123,7 @@ var Login_form = (_dec = (0, _reactRedux.connect)(function (state) {
         value: function handleFormSubmit(e) {
             var _this3 = this;
 
+            alert(e);
             e.preventDefault();
             this.refs.submit.value = "Submitting...";
             this.refs.submit.className += " bg-animation";
@@ -174,7 +171,7 @@ var Login_form = (_dec = (0, _reactRedux.connect)(function (state) {
                                 )
                             });
                         } else {
-                            _this3.props.dispatch((0, _user.login_user)(_jsonwebtoken2.default.decode(data.token)));
+                            _this3.props.dispatch((0, _user.login_user)(jwt.decode(data.token)));
                             window.localStorage.setItem("jwt_token", data.token);
                             _this3.props.history.push(_this3.state.from);
                         }
